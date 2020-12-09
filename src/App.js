@@ -1,7 +1,9 @@
 // import Jumbotron from 'react-bootstrap/Jumbotron'
 // import Button from 'react-bootstrap/Button'
-import { Button, Jumbotron } from 'react-bootstrap'
-import Search from './components/search'
+import React from 'react';
+import { Jumbotron } from 'react-bootstrap'
+import Search from './components/Search'
+import Results from './components/Results'
 
 function App() {
   return (
@@ -13,7 +15,8 @@ function App() {
         </p>
         <Search />
       </Jumbotron>
-    </div>
+      <Results />
+    </div>    
   );
 }
 
