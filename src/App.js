@@ -5,7 +5,7 @@ import Results from './components/Results'
 
 class App extends Component {
     state = {
-        resultsList: ['1','2','3']
+        resultsList: []
     }
 
     updateResults = (search) => {

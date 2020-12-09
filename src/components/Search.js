@@ -4,7 +4,7 @@ import { Form, Button } from 'react-bootstrap'
 class Search extends Component {
 
 	state = {
-		search: 'hi'
+		search: ''
 	}
 
 	handleChange = event => {
