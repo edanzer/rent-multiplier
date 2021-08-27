@@ -2,8 +2,8 @@ import { Component } from 'react'
 import { Jumbotron } from 'react-bootstrap'
 import Search from './components/Search'
 import Results from './components/Results'
-//import * as data from "./data/zillow-home-values"
-import data from "./data/zillow-home-values"
+import homeValues from "./data/zillow-home-values"
+import rentalPrices from "./data/zillow-rental-prices"
 
 var unirest = require('unirest');
 
@@ -21,31 +21,49 @@ class App extends Component {
 
         // Get home value data for search, return empty array if no search
         const regex = new RegExp(search, "i");
-        const results = search ? data.filter( home => home.city.match(regex)) : [];
-        console.log(results);
+        const filteredHomeValues = search ? homeValues.filter( home => home.city.match(regex)) : [];
+        const filteredRentalPrices = search ? rentalPrices.filter( rental => rental.cityState.match(regex)) : [];
+        console.log(filteredRentalPrices);
         
-        // In case of multiple results, create array of home prices
-        const homePriceArray = [];
-        results.forEach((home) => {
-            console.log('home ', home.homeValue);
-            homePriceArray.push(home.homeValue);
+        // In case of multiple results, create array of all matching home values and rental prices
+        const homeValueArray = [];
+        const rentalPriceArray = [];
+        filteredHomeValues.forEach((home) => {
+            homeValueArray.push(home.homeValue);
+        });
+        filteredRentalPrices.forEach((rental) => {
+            rentalPriceArray.push(rental.rent);
         });
         
-        // Calculate average
-        const averagePrice = homePriceArray.reduce( function (sum, value) {
+        // Calculate averages
+        const averageHomeValue = homeValueArray.reduce( function (sum, value) {
             return sum + value;
-        }, 0) / homePriceArray.length;
+        }, 0) / homeValueArray.length;
+        const averageRentalPrice = rentalPriceArray.reduce( function (sum, value) {
+            return sum + value;
+        }, 0) / rentalPriceArray.length;
+        console.log('averageRentalPrice ', averageRentalPrice);
 
-        // Format as currency
+        // Format as currency or percentage
         const formatCurrency = (number) => {
-            return number.toLocaleString('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0});
+            return number.toLocaleString('en-US', { style: 'currency', currency: 'USD', maximumFractionDigits: 0});
         }
+        const formatPercentage = (number) => {
+            return number.toLocaleString('en-US', { style: 'percent', maximumFractionDigits: 2});
+        }
+        var formatter = new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+            maximumFractionDigits: 0,      
+        });
 
         // Output
         this.setState({  activeSearch: true });
         this.setState({  location: search });
-        this.setState({  averageHomeValue: formatCurrency(averagePrice) });
-        console.log(this.state.activeSearch);
+        this.setState({  averageHomeValue: formatCurrency(averageHomeValue) });
+        this.setState({  averageRentalPrice: formatCurrency(averageRentalPrice) });
+        this.setState({  grossRentMultiplier: formatPercentage(averageRentalPrice/averageHomeValue) });
+
     }
 
     render () {

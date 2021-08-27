@@ -9,16 +9,16 @@ class Results extends Component {
 				<Row>
 					<ListGroup className="results-list">
 						<ListGroup.Item className="location">
-							<p><span class="label">Location:</span> {this.props.location}</p>
+							<p><span className="label">Location:</span> {this.props.location}</p>
 						</ListGroup.Item>
 						<ListGroup.Item>
-				  			<p><span class="label">Average Home Value:</span> {this.props.averageHomeValue}</p>
+				  			<p><span className="label">Average Home Value:</span> {this.props.averageHomeValue}</p>
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<p><span class="label">Average Rental Price:</span> {this.props.averageRentalPrice}</p>
+							<p><span className="label">Average Rental Price:</span> {this.props.averageRentalPrice}</p>
 						</ListGroup.Item>
 						<ListGroup.Item>
-							<p><span class="label">Gross Rent Multiplier:</span> {this.props.grossRentMultiplier}</p>
+							<p><span className="label">Gross Rent Multiplier:</span> {this.props.grossRentMultiplier}</p>
 						</ListGroup.Item>
 					</ListGroup>
 				</Row>

@@ -1,5 +1,7 @@
 # Calculating Gross Rent Multipliers
 
+**Note this project is still very much in development, not fully functional.**
+
 This project takes data from Zillow on home values and rental prices and uses it to calculate gross rent multipliers. 
 
 A gross rentiplier is simply Monthly Rent / Home Value. It is a common ratio used to evaluate the likely cash returns on rental real estate. All things equal, the higher the gross rent multiplier, the higher the cash returns. 
