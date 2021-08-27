@@ -9,12 +9,7 @@ import rentalPrices from './data/zillow-rental-prices';
 const App = () => {
 
     const [results, setResults] = useState([]);
-    const [location, setLocation] = useState('Not Available');
-    const [averageHomeValue, setAverageHomeValue] = useState('Not Available');
-    const [averageRentalPrice, setAverageRentalPrice] = useState('Not Available');
-    const [grossRentMultiplier, setGrossRentMultiplier] = useState('Not Available');
     const [activeSearch, setActiveSearch] = useState(false);
-
 
     const updateResults = (search) => {
 
@@ -31,10 +26,6 @@ const App = () => {
 
         // Update state
         setActiveSearch(true);
-        setLocation(search);
-        setAverageHomeValue( formatNumber('currency', averageHomeValue) );
-        setAverageRentalPrice( formatNumber('currency', averageRentalPrice) );
-        setGrossRentMultiplier( formatNumber('percent', averageRentalPrice/averageHomeValue) );
         const newResultsCard = {
             id: results.length + 1,
             location: search,
@@ -42,14 +33,7 @@ const App = () => {
             averageRentalPrice: formatNumber('currency', averageRentalPrice),
             grossRentMultiplier: formatNumber('percent', averageRentalPrice/averageHomeValue)
         }
-        console.log('results array before search');
-        console.log(results);
-        console.log('newResultsCard');
-        console.log(newResultsCard);
-        results.push(newResultsCard);
-        console.log('results array after search');
-        console.log(results);
-
+        setResults(results => [...results, newResultsCard]);
     }
 
     return (
@@ -61,13 +45,7 @@ const App = () => {
             </Jumbotron>
             {
                 activeSearch ? (
-                    <Results 
-                        results = {results}
-                        location = {location}
-                        averageHomeValue = {averageHomeValue}
-                        averageRentalPrice = {averageRentalPrice}
-                        grossRentMultiplier = {grossRentMultiplier}
-                    />
+                    <Results results = {results} />
                 ) : null
             }
         </div>    
