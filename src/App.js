@@ -8,11 +8,13 @@ import rentalPrices from './data/zillow-rental-prices';
 
 const App = () => {
 
-    const [activeSearch, setActiveSearch] = useState(false);
+    const [results, setResults] = useState([]);
     const [location, setLocation] = useState('Not Available');
     const [averageHomeValue, setAverageHomeValue] = useState('Not Available');
     const [averageRentalPrice, setAverageRentalPrice] = useState('Not Available');
     const [grossRentMultiplier, setGrossRentMultiplier] = useState('Not Available');
+    const [activeSearch, setActiveSearch] = useState(false);
+
 
     const updateResults = (search) => {
 
@@ -33,6 +35,21 @@ const App = () => {
         setAverageHomeValue( formatNumber('currency', averageHomeValue) );
         setAverageRentalPrice( formatNumber('currency', averageRentalPrice) );
         setGrossRentMultiplier( formatNumber('percent', averageRentalPrice/averageHomeValue) );
+        const newResultsCard = {
+            id: results.length + 1,
+            location: search,
+            averageHomeValue: formatNumber('currency', averageHomeValue),
+            averageRentalPrice: formatNumber('currency', averageRentalPrice),
+            grossRentMultiplier: formatNumber('percent', averageRentalPrice/averageHomeValue)
+        }
+        console.log('results array before search');
+        console.log(results);
+        console.log('newResultsCard');
+        console.log(newResultsCard);
+        results.push(newResultsCard);
+        console.log('results array after search');
+        console.log(results);
+
     }
 
     return (
@@ -45,6 +62,7 @@ const App = () => {
             {
                 activeSearch ? (
                     <Results 
+                        results = {results}
                         location = {location}
                         averageHomeValue = {averageHomeValue}
                         averageRentalPrice = {averageRentalPrice}

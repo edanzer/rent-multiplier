@@ -16,6 +16,11 @@ code {
   padding: 40px;
 }
 
+.results-card {
+  margin-right: 20px;
+  width: 300px
+}
+
 .results .location {
   background: #555;
   color: #fff;
