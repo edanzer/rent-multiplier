@@ -16,6 +16,12 @@ code {
   padding: 40px;
 }
 
+.search-box,
+.search-box .rbt-input {
+  width: 400px;
+  margin-right: 4px;
+}
+
 .results-card {
   margin-right: 20px;
   width: 300px
@@ -24,12 +30,9 @@ code {
 .results .location {
   background: #555;
   color: #fff;
+  font-weight: bold;
 }
 
 .results .list-group-item p {
   margin-bottom: 0;
-}
-
-.results .label {
-  font-weight: bold;
 }
