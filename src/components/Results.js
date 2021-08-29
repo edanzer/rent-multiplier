@@ -1,4 +1,4 @@
-import { Container, Row, ListGroup } from 'react-bootstrap'
+import { Container, Row, ListGroup, CloseButton } from 'react-bootstrap'
 
 const Results = (props) => {
 	return (
@@ -9,6 +9,10 @@ const Results = (props) => {
                         <ListGroup key={item.id} className="results-card">
 							<ListGroup.Item className="location">
 								<p>{item.location}</p>
+								<CloseButton 
+									className="remove-button" 
+									onClick={() => props.removeLocation(item.id)}
+								/>
 							</ListGroup.Item>
 							<ListGroup.Item>
 								<p><span className="label">Average Home Value:</span> {item.averageHomeValue}</p>

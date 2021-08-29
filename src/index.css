@@ -12,19 +12,30 @@ code {
     monospace;
 }
 
-.results {
-  padding: 40px;
-}
-
 .search-box,
 .search-box .rbt-input {
   width: 400px;
   margin-right: 4px;
 }
 
+.results {
+  padding: 40px;
+}
+
 .results-card {
   margin-right: 20px;
   width: 300px
+}
+
+.remove-button {
+  color: #fff;
+  font-weight: 400;
+  font-size: 30px;
+  text-shadow: none;
+  opacity: .8;
+  position: absolute;
+  right: 14px;
+  top: 6px;
 }
 
 .results .location {

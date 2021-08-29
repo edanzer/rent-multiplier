@@ -36,6 +36,11 @@ const App = () => {
         setResults(results => [...results, newResultsCard]);
     }
 
+    const removeLocation = (id) => {
+        const newResults = results.filter( item => item.id !== id );
+        setResults(newResults);
+    }
+
     return (
         <div className="App">
             <Jumbotron>
@@ -45,7 +50,10 @@ const App = () => {
             </Jumbotron>
             {
                 activeSearch ? (
-                    <Results results = {results} />
+                    <Results 
+                        results = {results} 
+                        removeLocation = {removeLocation} 
+                    />
                 ) : null
             }
         </div>    
