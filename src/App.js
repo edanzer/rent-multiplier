@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { Jumbotron } from 'react-bootstrap';
 import Search from './components/Search';
 import Results from './components/Results';
-import { getPricesOnly, calculateAverage, formatNumber } from './components/Helpers';
-import rentalPrices from './data/zillow-rental-prices';
+import { formatNumber } from './components/Helpers';
+import rentalPrices from './data/rental-prices';
 
 const App = () => {
 
@@ -12,29 +12,26 @@ const App = () => {
 
     const updateResults = (search) => {
         
-        const searchTerm = search[0].city;
-        const city = search[0].location;
+        // Get city and average home value from search
+        const location = search[0].location;
         const averageHomeValue = search[0].averageHomeValue;
 
-        // Get home value data for search, return empty array if no search
-        const regex = new RegExp(searchTerm, "i");
-        // const filteredHomeValues = search ? homeValues.filter( item => item.location.match(regex)) : [];
-        const filteredRentalPrices = search ? rentalPrices.filter( rental => rental.cityState.match(regex)) : [];
+        // Get average rental price from rental price data
+        const regex = new RegExp(location, "i");
+        const matchingLocation = rentalPrices.filter( item => item.location.match(regex));
+        const averageRentalPrice = matchingLocation.length >= 1 ? matchingLocation[0].rent : "Not Available";
 
-        // In case of multiple results in one location, calculate average home value and rental price
-        // const homeValuesOnly = getPricesOnly( filteredHomeValues, 'homeValue' );
-        // const averageHomeValue = calculateAverage( homeValuesOnly );
-        const rentalPricesOnly = getPricesOnly( filteredRentalPrices, 'rent' );
-        const averageRentalPrice = calculateAverage( rentalPricesOnly );        
-
+        // Calculate gross rent multiplier
+        const grossRentMultiplier = matchingLocation.length >= 1 ? averageRentalPrice/averageHomeValue : "Not Available";
+        
         // Update state
         setActiveSearch(true);
         const newResultsCard = {
             id: results.length + 1,
-            location: city,
+            location: location,
             averageHomeValue: formatNumber('currency', averageHomeValue),
             averageRentalPrice: formatNumber('currency', averageRentalPrice),
-            grossRentMultiplier: formatNumber('percent', averageRentalPrice/averageHomeValue)
+            grossRentMultiplier: formatNumber('percent', grossRentMultiplier)
         }
         setResults(results => [...results, newResultsCard]);
     }
