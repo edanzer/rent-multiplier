@@ -5,24 +5,24 @@ import 'react-bootstrap-typeahead/css/Typeahead.css';
 import homeValues from '../data/home-values';
 
 const Search = (props) => {
-	//const [search, setSearch] = useState('');
-  	const [multiSelections, setMultiSelections] = useState([]);
+  	const [singleSelection, setSingleSelection] = useState([]);
 
 	const handleSubmit = e => {
-		e.preventDefault()
-		props.updateSearchResults(multiSelections)
+		e.preventDefault();
+		props.updateSearchResults(singleSelection);
+		setSingleSelection([])
 	}
+
 	return (
 		<Form inline onSubmit={handleSubmit.bind(this)}>
 			<Form.Group controlId="formSearchArea">
 				<Typeahead
 					id="basic-typeahead-multiple"
 					labelKey="location"
-					multiple
-					onChange={setMultiSelections}
+					onChange={setSingleSelection}
 					options={homeValues}
-					placeholder="Choose Locations"
-					selected={multiSelections}
+					placeholder="Choose Location"
+					selected={singleSelection}
 					className="search-box"
 				/>
 			</Form.Group>
