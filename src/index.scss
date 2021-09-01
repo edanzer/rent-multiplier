@@ -13,36 +13,101 @@ code {
     monospace;
 }
 
+// Jumbotron 
+.jumbotron {
+  background: #012a4a;
+  text-align: center;
+  border-radius: 0;
+  padding: 4.5rem 2rem 5rem;
+  h1, p {
+    color: #ffffff;
+  }
+  h1 {
+    margin-bottom: 20px;
+  }
+  p {
+    margin-bottom: 2px;
+  }
+}
+
 // Search Component 
-.search-box,
-.search-box .rbt-input {
-  width: 400px;
-  margin-right: 4px;
+.search-box {
+  justify-content: center;
+  margin-top: 26px;
+  .rbt-input {
+    width: 400px;
+    border-radius: 2px 0 0 2px;
+    outline: none;
+    border: none;
+    height: 44px;
+    &:focus,
+    &:active {
+      box-shadow: none;
+    }
+  }
+  button {
+    background: #118ab2;
+    border: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    height: 44px;
+    line-height: 44px;
+    padding: 0 30px;
+    border-radius: 0 2px 2px 0;
+    letter-spacing: .5px;
+    &:hover,
+    &:active,
+    &:focus {
+      background: #2c7da0 !important;
+      border-width: 0 !important;
+      box-shadow: none !important;
+    }
+  }
+  .dropdown-item:active {
+    background-color: #e9ecef;
+    color: #212529;
+  }
 }
 
 // Results Component
 .results {
   padding: 40px;
+  width: 90%;
+  h1 {
+    color: black;
+  }
   .results-card {
     margin-right: 20px;
-    width: 300px
+    width: 350px
   }
   .location {
-    background: #555;
+    background: #118ab2;
     color: #fff;
     font-weight: bold;
+    padding: 1rem 1.25rem;
   }
   .remove-button {
     color: #fff;
     font-weight: 400;
     font-size: 30px;
+    font-weight: bold;
     text-shadow: none;
     opacity: .8;
     position: absolute;
     right: 14px;
-    top: 6px;
+    top: 10px;
   }
   .list-group-item p {
     margin-bottom: 0;
   }
+}
+// Move to Results Component
+.App > h1 {
+  font-size: 40px;
+  letter-spacing: .5px;
+  text-align: center;
+  margin-top: 140px;
+  font-weight: 600;
+  color: #ccc;
+
 }

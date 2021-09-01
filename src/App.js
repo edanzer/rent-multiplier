@@ -45,7 +45,8 @@ const App = () => {
         <div className="App">
             <Jumbotron>
                 <h1>Gross Rent Multiplier</h1>
-                <p>Find the Gross Rent Multiplier for a particular area. Search by zip or city + state.</p>
+                <p>Find the average gross multiplier by city.</p> 
+                <p>To start, select a city and click submit. To compare cities, just repeat.</p>
                 <Search updateSearchResults = {updateResults} />
             </Jumbotron>
             {
@@ -54,7 +55,7 @@ const App = () => {
                         results = {results} 
                         removeLocation = {removeLocation} 
                     />
-                ) : null
+                ) : <h1>Select a city above to start.</h1>
             }
         </div>    
     );

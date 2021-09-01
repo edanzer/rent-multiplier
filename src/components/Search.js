@@ -14,7 +14,7 @@ const Search = (props) => {
 	}
 
 	return (
-		<Form inline onSubmit={handleSubmit.bind(this)}>
+		<Form inline onSubmit={handleSubmit.bind(this)} className="search-box">
 			<Form.Group controlId="formSearchArea">
 				<Typeahead
 					id="basic-typeahead-multiple"
@@ -23,7 +23,6 @@ const Search = (props) => {
 					options={homeValues}
 					placeholder="Choose Location"
 					selected={singleSelection}
-					className="search-box"
 				/>
 			</Form.Group>
 			<Button variant="primary" type="submit">Submit</Button>
