@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
-import homeValues from '../data/home-values';
+import data from '../data/data';
 
 const Search = (props) => {
   	const [singleSelection, setSingleSelection] = useState([]);
@@ -20,7 +20,7 @@ const Search = (props) => {
 					id="basic-typeahead-multiple"
 					labelKey="location"
 					onChange={setSingleSelection}
-					options={homeValues}
+					options={data}
 					placeholder="Choose Location"
 					selected={singleSelection}
 				/>

@@ -3,7 +3,6 @@ import { Jumbotron } from 'react-bootstrap';
 import Search from './components/Search';
 import Results from './components/Results';
 import { formatNumber } from './components/Helpers';
-import rentalPrices from './data/rental-prices';
 
 const App = () => {
 
@@ -15,14 +14,8 @@ const App = () => {
         // Get city and average home value from search
         const location = search[0].location;
         const averageHomeValue = search[0].averageHomeValue;
-
-        // Get average rental price from rental price data
-        const regex = new RegExp(location, "i");
-        const matchingLocation = rentalPrices.filter( item => item.location.match(regex));
-        const averageRentalPrice = matchingLocation.length >= 1 ? matchingLocation[0].rent : "Not Available";
-
-        // Calculate gross rent multiplier
-        const grossRentMultiplier = matchingLocation.length >= 1 ? averageRentalPrice/averageHomeValue : "Not Available";
+        const averageRent = search[0].averageRent ? search[0].averageRent : "Not Available";
+        const grossRentMultiplier = search[0].averageRent ? averageRent/averageHomeValue : "Not Available";
         
         // Update state
         setActiveSearch(true);
@@ -30,7 +23,7 @@ const App = () => {
             id: results.length + 1,
             location: location,
             averageHomeValue: formatNumber('currency', averageHomeValue),
-            averageRentalPrice: formatNumber('currency', averageRentalPrice),
+            averageRentalPrice: formatNumber('currency', averageRent),
             grossRentMultiplier: formatNumber('percent', grossRentMultiplier)
         }
         setResults(results => [...results, newResultsCard]);

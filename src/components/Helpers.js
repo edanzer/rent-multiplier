@@ -9,8 +9,8 @@ export const formatNumber = ( type, number ) => {
     } else if ( 'percent' === type ) {
         return number.toLocaleString('en-US', { 
             style: 'percent', 
-            minimumFractionDigits: 0,
-            maximumFractionDigits: 0
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
         });
     }
 }
