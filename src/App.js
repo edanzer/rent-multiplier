@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Jumbotron } from 'react-bootstrap';
 import Search from './components/Search';
 import Results from './components/Results';
 import { formatNumber } from './components/Helpers';
@@ -11,7 +10,7 @@ const App = () => {
 
     const updateResults = (search) => {
         
-        // Get city, home value, rent from search + calculate gross rent multiplier
+        // Get city, home value, rent. Calculate gross rent multiplier.
         const location = search[0].location;
         const averageHomeValue = search[0].averageHomeValue;
         const averageRent = search[0].averageRent ? search[0].averageRent : "Not Available";
@@ -36,12 +35,12 @@ const App = () => {
 
     return (
         <div className="App">
-            <Jumbotron>
+            <header className="header">
                 <h1>Gross Rent Multiplier</h1>
                 <p>Find the average gross multiplier by city.</p> 
                 <p>To start, select a city and click submit. To compare cities, just repeat.</p>
                 <Search updateSearchResults = {updateResults} />
-            </Jumbotron>
+            </header>
             {
                 activeSearch ? (
                     <Results 

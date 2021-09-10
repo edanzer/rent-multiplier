@@ -1,8 +1,8 @@
-// Import testing resources
 import { render, fireEvent, waitFor, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from './App';
 
+// Mock fetch call
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockResolvedValue({
     json: jest.fn().mockResolvedValue([
@@ -34,6 +34,7 @@ afterEach(() => {
   jest.restoreAllMocks();
 });
 
+// Simple tests of initial state
 describe('App initially renders correctly', () => {
 
   it('renders page title', () => {
@@ -70,25 +71,19 @@ describe('App initially renders correctly', () => {
 
 });
 
+// Test search functionality
 describe('Search works correctly', () => {
 
   it('shows search results correctly', async () => {
 
-    // Setup
-    // const { 
-    //   getByText, 
-    //   getByPlaceholderText, 
-    //   getAllByText,
-    //   getByRole
-    // } = await render(<App />);
+    // Set up
     await act( async () => render(<App />) );
-
     const { 
       getByText, 
       getByPlaceholderText, 
-      getAllByText,
-      getByRole
     } = screen;
+
+    // Get search field and submit button
     const input = getByPlaceholderText("Choose Location");
     const button = getByText("Submit");
 
@@ -105,5 +100,6 @@ describe('Search works correctly', () => {
     expect(screen.getByText("Average Rental Price:")).toBeInTheDocument();
     expect(screen.getByText("Gross Rent Multiplier:")).toBeInTheDocument();
       
-    })    
+  })    
+
 });
