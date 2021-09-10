@@ -1,13 +1,40 @@
 // Import testing resources
-import { render, fireEvent, waitFor, cleanup } from '@testing-library/react';
+import { render, fireEvent, waitFor, screen, act } from '@testing-library/react';
 import '@testing-library/jest-dom';
-
-// Import component 
 import App from './App';
 
+beforeEach(() => {
+  jest.spyOn(global, 'fetch').mockResolvedValue({
+    json: jest.fn().mockResolvedValue([
+      {
+        "location":"Colorado: Boulder",
+        "averageHomeValue":800000,
+        "averageRent":3000
+      },
+      {
+        "location":"Colorado: Denver",
+        "averageHomeValue":750000,
+        "averageRent":2500
+      },
+      {
+        "location":"Nevada: Boulder City",
+        "averageHomeValue":350000,
+        "averageRent":1500
+      },
+      {
+        "location":"Florida: Miami",
+        "averageHomeValue":500000,
+        "averageRent":null
+      }
+    ])
+  })
+});
+
+afterEach(() => {
+  jest.restoreAllMocks();
+});
+
 describe('App initially renders correctly', () => {
-  
-  afterEach(cleanup);
 
   it('renders page title', () => {
     const { getByText } = render(<App />);
@@ -45,32 +72,38 @@ describe('App initially renders correctly', () => {
 
 describe('Search works correctly', () => {
 
-  afterEach(cleanup);
-
   it('shows search results correctly', async () => {
 
     // Setup
+    // const { 
+    //   getByText, 
+    //   getByPlaceholderText, 
+    //   getAllByText,
+    //   getByRole
+    // } = await render(<App />);
+    await act( async () => render(<App />) );
+
     const { 
       getByText, 
       getByPlaceholderText, 
       getAllByText,
       getByRole
-    } = render(<App />);
+    } = screen;
     const input = getByPlaceholderText("Choose Location");
     const button = getByText("Submit");
 
     // Execute search
     await waitFor(() => fireEvent.change(input, {target: {value: 'boulder'}}));
-    await waitFor(() => getAllByText('Boulder'));
-    const menuItem = getByRole('option', { name : 'Colorado: Boulder' });
+    await waitFor(() => screen.getAllByText('Boulder'), { timeout: 4500 } );
+    const menuItem = screen.getByRole('option', { name : 'Colorado: Boulder' });
     fireEvent.click(menuItem);
     fireEvent.click(button);
     
     // Check that result exists
-    expect(getByText("Colorado: Boulder")).toBeInTheDocument();
-    expect(getByText("Average Home Value:")).toBeInTheDocument();
-    expect(getByText("Average Rental Price:")).toBeInTheDocument();
-    expect(getByText("Gross Rent Multiplier:")).toBeInTheDocument();
-    
-  });
+    expect(screen.getByText("Colorado: Boulder")).toBeInTheDocument();
+    expect(screen.getByText("Average Home Value:")).toBeInTheDocument();
+    expect(screen.getByText("Average Rental Price:")).toBeInTheDocument();
+    expect(screen.getByText("Gross Rent Multiplier:")).toBeInTheDocument();
+      
+    })    
 });

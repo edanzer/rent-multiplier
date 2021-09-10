@@ -11,7 +11,7 @@ const App = () => {
 
     const updateResults = (search) => {
         
-        // Get city and average home value from search
+        // Get city, home value, rent from search + calculate gross rent multiplier
         const location = search[0].location;
         const averageHomeValue = search[0].averageHomeValue;
         const averageRent = search[0].averageRent ? search[0].averageRent : "Not Available";
