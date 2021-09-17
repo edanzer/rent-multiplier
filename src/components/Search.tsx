@@ -3,9 +3,21 @@ import { Form, Button } from 'react-bootstrap';
 import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
-const Search = (props) => {
+interface Props {
+    updateResults: any; 
+}
+
+interface Location {
+	id: any;
+	location: any;
+	averageHomeValue: any;
+	averageRent: any;
+}
+
+const Search = ( { updateResults }: Props) => {
   	const [singleSelection, setSingleSelection] = useState([]);
 	const [data, setData] = useState([]);
+	
 
 	useEffect(() => {
 		async function fetchData() {
@@ -16,9 +28,9 @@ const Search = (props) => {
 		fetchData();
 	}, []);
 
-	const handleSubmit = e => {
+	const handleSubmit = (e: React.SyntheticEvent) => {
 		e.preventDefault();
-		props.updateSearchResults(singleSelection);
+		updateResults(singleSelection);
 		setSingleSelection([])
 	}
 
@@ -27,6 +39,7 @@ const Search = (props) => {
 			<Form.Group controlId="formSearchArea">
 				<Typeahead
 					id="basic-typeahead-multiple"
+					//@ts-ignore
 					labelKey="location"
 					onChange={setSingleSelection}
 					options={data}

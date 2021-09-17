@@ -1,4 +1,4 @@
-export const formatNumber = ( type, number ) => {
+export const formatNumber = ( type: string, number: number ): string => {
     if ( 'currency' === type ) {
         return number.toLocaleString('en-US', { 
             style: 'currency', 
@@ -13,4 +13,5 @@ export const formatNumber = ( type, number ) => {
             maximumFractionDigits: 2
         });
     }
+    return "Not available";
 }

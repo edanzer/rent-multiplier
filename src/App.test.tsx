@@ -2,32 +2,52 @@ import { render, fireEvent, waitFor, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom';
 import App from './App';
 
+interface Location {
+  id: number;
+  location: string;
+  averageHomeValue: number;
+  averageRent: number|null;
+  grossRentMultiplier: number|null;
+}  
+
 // Mock fetch call
+const mockData: Location[] = [
+  {
+    "id": 1,
+    "location":"Colorado: Boulder",
+    "averageHomeValue":800000,
+    "averageRent":3000,
+    "grossRentMultiplier":.2 
+  },
+  {
+    "id": 2,
+    "location":"Colorado: Denver",
+    "averageHomeValue":750000,
+    "averageRent":2500,
+    "grossRentMultiplier":.2
+  },
+  {
+    "id": 3,
+    "location":"Nevada: Boulder City",
+    "averageHomeValue":350000,
+    "averageRent":1500,
+    "grossRentMultiplier":.2
+  },
+  {
+    "id": 4,
+    "location":"Florida: Miami",
+    "averageHomeValue":500000,
+    "averageRent":null,
+    "grossRentMultiplier":null
+  }
+];
+
 beforeEach(() => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
-    json: jest.fn().mockResolvedValue([
-      {
-        "location":"Colorado: Boulder",
-        "averageHomeValue":800000,
-        "averageRent":3000
-      },
-      {
-        "location":"Colorado: Denver",
-        "averageHomeValue":750000,
-        "averageRent":2500
-      },
-      {
-        "location":"Nevada: Boulder City",
-        "averageHomeValue":350000,
-        "averageRent":1500
-      },
-      {
-        "location":"Florida: Miami",
-        "averageHomeValue":500000,
-        "averageRent":null
-      }
-    ])
-  })
+  jest.spyOn(global, 'fetch').mockImplementation(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockData),
+    } as Response),
+  );
 });
 
 afterEach(() => {
@@ -77,6 +97,7 @@ describe('Search works correctly', () => {
   it('shows search results correctly', async () => {
 
     // Set up
+    //@ts-ignore
     await act( async () => render(<App />) );
     const { 
       getByText, 
