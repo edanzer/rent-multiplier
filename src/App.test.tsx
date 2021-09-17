@@ -42,19 +42,6 @@ const mockData: Location[] = [
   }
 ];
 
-function setupFetchStub(mockData: Location[]) {
-  // return function fetchStub(_url) {
-    return new Promise((resolve) => {
-      resolve({
-        json: () =>
-          Promise.resolve({
-            mockData,
-          }),
-      })
-    })
-  // }
-}
-
 beforeEach(() => {
   jest.spyOn(global, 'fetch').mockImplementation(() =>
     Promise.resolve({
@@ -62,12 +49,6 @@ beforeEach(() => {
     } as Response),
   );
 });
-
-// beforeEach(() => {
-//     jest.spyOn(global, 'fetch').mockResolvedValue({
-//       json: jest.fn().mockResolvedValue(mockData)
-//     })
-// });
 
 afterEach(() => {
   jest.restoreAllMocks();
@@ -116,6 +97,7 @@ describe('Search works correctly', () => {
   it('shows search results correctly', async () => {
 
     // Set up
+    //@ts-ignore
     await act( async () => render(<App />) );
     const { 
       getByText, 
