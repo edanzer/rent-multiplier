@@ -1,30 +1,18 @@
 import { useState } from 'react';
+import { useSelector, useDispatch } from "react-redux";
+import { RootState } from "./app/store";
 import Search from './components/Search';
 import Results from './components/Results';
 import { formatNumber } from './components/Helpers';
-
-interface LocationData {
-    id: number;
-    location: string;
-    averageHomeValue: number;
-    averageRent: number|null;
-    grossRentMultiplier: number|null;
-}   
-
-interface LocationResult {
-    id: number;
-    location: string;
-    averageHomeValue: string;
-    averageRent: string;
-    grossRentMultiplier: string;
-}   
+import { addLocation } from "./features/resultsSlice";
+import { LocationData, LocationCard } from "./types/types";
 
 const App = () => {
 
-    
-
-    const [results, setResults] = useState<LocationResult[]>([]);
+    //const [results, setResults] = useState<LocationCard[]>();
     const [activeSearch, setActiveSearch] = useState(false);
+    const results = useSelector((state: RootState) => state.results.value)
+    const dispatch = useDispatch();
 
     const updateResults = (search: LocationData[]) => {
         
@@ -36,19 +24,18 @@ const App = () => {
         
         // Update state
         setActiveSearch(true);
-        const newLocationCard: LocationResult = {
+        const newLocationCard: LocationCard = {
             id: results.length + 1,
             location: location,
             averageHomeValue: formatNumber('currency', averageHomeValue),
             averageRent: averageRent ? formatNumber('currency', averageRent) : "Not Available",
             grossRentMultiplier: grossRentMultiplier ? formatNumber('percent', grossRentMultiplier) : "Not Available"
         }
-        setResults(prevResults => [...prevResults, newLocationCard]);
+        dispatch(addLocation(newLocationCard));
     }
 
-    const removeLocation = (currentResults: LocationResult[], id: number) => {
-        const newResults = currentResults.filter( item => item.id !== id );
-        setResults(newResults);
+    const removeLocation = (id: number) => {
+        dispatch(removeLocation(id));
     }
 
     return (

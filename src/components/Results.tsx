@@ -24,7 +24,7 @@ const Results = ( {results, removeLocation}: Props ) => {
 								<p>{item.location}</p>
 								<CloseButton 
 									className="remove-button" 
-									onClick={() => removeLocation(results, item.id)}
+									onClick={() => removeLocation(item.id)}
 								/>
 							</ListGroup.Item>
 							<ListGroup.Item>
