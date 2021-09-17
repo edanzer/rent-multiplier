@@ -17,13 +17,10 @@ export const resultsSlice = createSlice({
             state.value.push(action.payload);
         },
         removeLocation: (state, action: PayloadAction<number>) => {
-            state.value.filter((item) => item.id != action.payload);
+            state.value = state.value.filter(item => item.id !== action.payload);
         }
     }
 });
 
-// Export action creators (created for you by toolkit) like this
 export const { addLocation, removeLocation } = resultsSlice.actions
-
-// Export reducer like this
 export default resultsSlice.reducer;

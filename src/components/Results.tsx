@@ -1,30 +1,32 @@
+// Import third party resources
+import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, ListGroup, CloseButton } from 'react-bootstrap'
 
-interface Props {
-    results: any; 
-	removeLocation: any;
-}
+// Import app resources
+import { RootState } from "../app/store";
+import { removeLocation } from "../features/resultsSlice";
+import { LocationCard } from "../types/types";
 
-interface Location {
-	id: number;
-	location: string;
-	averageHomeValue: number;
-	averageRent: number|null;
-	grossRentMultiplier: number|null;
-}  
+const Results = () => {
 
-const Results = ( {results, removeLocation}: Props ) => {
+	const results = useSelector((state: RootState) => state.results.value);
+    const dispatch = useDispatch();
+
+	const removeLocationCard = (id: number) => {
+		dispatch(removeLocation(id));
+	}
+	
 	return (
 		<Container fluid className="results">
 			<Row>
 				{
-                    results.map( (item: Location) => (
+                    results.map( (item: LocationCard) => (
                         <ListGroup key={item.id} className="results-card">
 							<ListGroup.Item className="location">
 								<p>{item.location}</p>
 								<CloseButton 
 									className="remove-button" 
-									onClick={() => removeLocation(item.id)}
+									onClick={() => removeLocationCard(item.id)}
 								/>
 							</ListGroup.Item>
 							<ListGroup.Item>

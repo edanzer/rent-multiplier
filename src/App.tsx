@@ -1,4 +1,4 @@
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import Search from './components/Search';
 import Results from './components/Results';
@@ -6,11 +6,6 @@ import Results from './components/Results';
 const App = () => {
 
     const results = useSelector((state: RootState) => state.results.value)
-    const dispatch = useDispatch();
-
-    const removeLocation = (id: number) => {
-        dispatch(removeLocation(id));
-    }
 
     return (
         <div className="App">
@@ -22,10 +17,7 @@ const App = () => {
             </header>
             {
                 results.length > 0 ? (
-                    <Results 
-                        results = {results} 
-                        removeLocation = {removeLocation} 
-                    />
+                    <Results />
                 ) : <h1>Select a city above to start.</h1>
             }
         </div>    
