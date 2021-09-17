@@ -2,33 +2,72 @@ import { render, fireEvent, waitFor, screen, act } from '@testing-library/react'
 import '@testing-library/jest-dom';
 import App from './App';
 
+interface Location {
+  id: number;
+  location: string;
+  averageHomeValue: number;
+  averageRent: number|null;
+  grossRentMultiplier: number|null;
+}  
+
 // Mock fetch call
+const mockData: Location[] = [
+  {
+    "id": 1,
+    "location":"Colorado: Boulder",
+    "averageHomeValue":800000,
+    "averageRent":3000,
+    "grossRentMultiplier":.2 
+  },
+  {
+    "id": 2,
+    "location":"Colorado: Denver",
+    "averageHomeValue":750000,
+    "averageRent":2500,
+    "grossRentMultiplier":.2
+  },
+  {
+    "id": 3,
+    "location":"Nevada: Boulder City",
+    "averageHomeValue":350000,
+    "averageRent":1500,
+    "grossRentMultiplier":.2
+  },
+  {
+    "id": 4,
+    "location":"Florida: Miami",
+    "averageHomeValue":500000,
+    "averageRent":null,
+    "grossRentMultiplier":null
+  }
+];
+
+function setupFetchStub(mockData: Location[]) {
+  // return function fetchStub(_url) {
+    return new Promise((resolve) => {
+      resolve({
+        json: () =>
+          Promise.resolve({
+            mockData,
+          }),
+      })
+    })
+  // }
+}
+
 beforeEach(() => {
-  jest.spyOn(global, 'fetch').mockResolvedValue({
-    json: jest.fn().mockResolvedValue([
-      {
-        "location":"Colorado: Boulder",
-        "averageHomeValue":800000,
-        "averageRent":3000
-      },
-      {
-        "location":"Colorado: Denver",
-        "averageHomeValue":750000,
-        "averageRent":2500
-      },
-      {
-        "location":"Nevada: Boulder City",
-        "averageHomeValue":350000,
-        "averageRent":1500
-      },
-      {
-        "location":"Florida: Miami",
-        "averageHomeValue":500000,
-        "averageRent":null
-      }
-    ])
-  })
+  jest.spyOn(global, 'fetch').mockImplementation(() =>
+    Promise.resolve({
+      json: () => Promise.resolve(mockData),
+    } as Response),
+  );
 });
+
+// beforeEach(() => {
+//     jest.spyOn(global, 'fetch').mockResolvedValue({
+//       json: jest.fn().mockResolvedValue(mockData)
+//     })
+// });
 
 afterEach(() => {
   jest.restoreAllMocks();
