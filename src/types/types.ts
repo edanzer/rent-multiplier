@@ -1,7 +1,3 @@
-// export interface AllResults {
-//     value: SingleResult[]
-// }
-
 export interface LocationData {
     id: number,
     location: string,
