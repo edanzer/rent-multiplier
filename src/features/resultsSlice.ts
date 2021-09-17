@@ -1,11 +1,7 @@
-import { createSlice, PayloadAction} from "@reduxjs/toolkit"
-import { LocationCard } from "../types/types";
+import { createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { LocationCard, Results} from "../types/types";
 
-interface ResultsState {
-    value: LocationCard[]
-}
-
-const initialState: ResultsState = {
+const initialState: Results = {
     value: []
 }
 
@@ -22,5 +18,5 @@ export const resultsSlice = createSlice({
     }
 });
 
-export const { addLocation, removeLocation } = resultsSlice.actions
+export const { addLocation, removeLocation } = resultsSlice.actions;
 export default resultsSlice.reducer;

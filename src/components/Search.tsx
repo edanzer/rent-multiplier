@@ -13,7 +13,7 @@ import { formatNumber } from './Helpers';
 
 const Search = () => {
 
-	const results = useSelector((state: RootState) => state.results.value)
+	const results = useSelector((state: RootState) => state.results.value);
     const dispatch = useDispatch();
 
   	const [singleSelection, setSingleSelection] = useState([]);

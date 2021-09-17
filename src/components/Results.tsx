@@ -1,6 +1,6 @@
 // Import third party resources
 import { useSelector, useDispatch } from "react-redux";
-import { Container, Row, ListGroup, CloseButton } from 'react-bootstrap'
+import { Container, Row, ListGroup, CloseButton } from 'react-bootstrap';
 
 // Import app resources
 import { RootState } from "../app/store";
@@ -15,7 +15,7 @@ const Results = () => {
 	const removeLocationCard = (id: number) => {
 		dispatch(removeLocation(id));
 	}
-	
+
 	return (
 		<Container fluid className="results">
 			<Row>

@@ -13,3 +13,7 @@ export interface LocationCard {
     averageRent: string,
     grossRentMultiplier: string
 }
+
+export interface Results {
+    value: LocationCard[]
+}
