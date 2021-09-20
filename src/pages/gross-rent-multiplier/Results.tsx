@@ -3,9 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Container, Row, ListGroup, CloseButton } from 'react-bootstrap';
 
 // Import app resources
-import { RootState } from "../app/store";
-import { removeLocation } from "../features/resultsSlice";
-import { LocationCard } from "../types/types";
+import { RootState } from "../../app/store";
+import { removeLocation } from "../../features/resultsSlice";
+import { LocationCard } from "../../types/types";
 
 const Results = () => {
 

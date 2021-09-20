@@ -6,10 +6,10 @@ import { Typeahead } from 'react-bootstrap-typeahead';
 import 'react-bootstrap-typeahead/css/Typeahead.css';
 
 // Import app resources
-import { RootState } from "../app/store";
-import { addLocation } from "../features/resultsSlice";
-import { LocationData, LocationCard } from "../types/types";
-import { formatNumber } from './Helpers';
+import { RootState } from "../../app/store";
+import { addLocation } from "../../features/resultsSlice";
+import { LocationData, LocationCard } from "../../types/types";
+import { formatNumber } from '../../components/Helpers';
 
 const Search = () => {
 
