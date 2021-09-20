@@ -2,9 +2,13 @@ import { useSelector } from "react-redux";
 import { RootState } from "./app/store";
 import Search from './components/Search';
 import Results from './components/Results';
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { Container, Nav, Navbar } from "react-bootstrap";
-import { LinkContainer } from 'react-router-bootstrap'
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import { Header } from "./components/Header";
+import { Home } from "./pages/Home";
+import { LocalRentData } from "./pages/LocalRentData";
+import { About } from "./pages/About";
+import { SignUp } from "./pages/SignUp";
 
 const App = () => {
 
@@ -12,35 +16,12 @@ const App = () => {
 
     return (
         <Router>
-            <Navbar bg="dark" variant="dark" expand="lg">
-                <Container>
-                    <LinkContainer to="/">
-                        <Navbar.Brand>Rently</Navbar.Brand>
-                    </LinkContainer>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto">
-                        <LinkContainer to="/">
-                            <Nav.Link>Home</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/gross-rent-multiplier">
-                            <Nav.Link>Gross Rent Multiplier</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/gross-rent-multiplier">
-                            <Nav.Link>Local Rent Data</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/about">
-                            <Nav.Link>About</Nav.Link>
-                        </LinkContainer>
-                        <LinkContainer to="/sign-up">
-                            <Nav.Link>Sign Up</Nav.Link>
-                        </LinkContainer>
-                    </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <Header/>
             <Switch>
                 <Route exact path="/">
+                    <Home/>
+                </Route>
+                <Route path="/gross-rent-multiplier">
                     <div className="App">
                         <header className="header">
                             <h1>Gross Rent Multiplier</h1>
@@ -55,10 +36,14 @@ const App = () => {
                         }
                     </div>
                 </Route>
+                <Route path="/local-rent-data">
+                    <LocalRentData/>
+                </Route>
                 <Route path="/about">
-                    <Container fluid className="results">
-                        <p>This is the about page.</p>
-                    </Container>
+                    <About/>
+                </Route>
+                <Route path="/sign-up">
+                    <SignUp/>
                 </Route>
             </Switch>
         </Router>  
