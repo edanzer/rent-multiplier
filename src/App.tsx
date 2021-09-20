@@ -16,7 +16,6 @@ const App = () => {
                 <Container>
                     <LinkContainer to="/">
                         <Navbar.Brand>Rently</Navbar.Brand>
-                            {/* <LinkContainer to="/"><Nav.Link>Rently</Nav.Link></LinkContainer> */}
                     </LinkContainer>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
@@ -24,8 +23,17 @@ const App = () => {
                         <LinkContainer to="/">
                             <Nav.Link>Home</Nav.Link>
                         </LinkContainer>
+                        <LinkContainer to="/gross-rent-multiplier">
+                            <Nav.Link>Gross Rent Multiplier</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/gross-rent-multiplier">
+                            <Nav.Link>Local Rent Data</Nav.Link>
+                        </LinkContainer>
                         <LinkContainer to="/about">
                             <Nav.Link>About</Nav.Link>
+                        </LinkContainer>
+                        <LinkContainer to="/sign-up">
+                            <Nav.Link>Sign Up</Nav.Link>
                         </LinkContainer>
                     </Nav>
                     </Navbar.Collapse>
